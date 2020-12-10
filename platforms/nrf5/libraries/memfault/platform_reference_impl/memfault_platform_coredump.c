@@ -113,7 +113,7 @@ const sMfltCoredumpRegion *memfault_platform_coredump_get_regions(const sCoredum
 
 void memfault_platform_coredump_storage_clear(void) {
   // static because sd_flash_write may take place asynchrnously
-  const static uint32_t invalidate = 0x0;
+  static const uint32_t invalidate = 0x0;
 
   // If the soft device is enabled we need to route our flash operation through it (Code saving
   // backtraces hits the flash directly since the soft device is out of the picture at the time we
