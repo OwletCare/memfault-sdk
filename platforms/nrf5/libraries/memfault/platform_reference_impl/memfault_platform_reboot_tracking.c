@@ -15,21 +15,24 @@
 #include "memfault/core/reboot_tracking.h"
 
 static uint32_t prv_reset_reason_get(void) {
+#ifdef SOFTDEVICE_PRESENT
   if (nrf_sdh_is_enabled()) {
     uint32_t reset_reas = 0;
     sd_power_reset_reason_get(&reset_reas);
     return reset_reas;
   }
-
+#endif
   return NRF_POWER->RESETREAS;
 }
 
 static void prv_reset_reason_clear(uint32_t reset_reas_clear_mask) {
+#ifdef SOFTDEVICE_PRESENT
   if (nrf_sdh_is_enabled()) {
     sd_power_reset_reason_clr(reset_reas_clear_mask);
-  } else {
-    NRF_POWER->RESETREAS |= reset_reas_clear_mask;
   }
+#else
+    NRF_POWER->RESETREAS |= reset_reas_clear_mask;
+#endif
 }
 
 void memfault_platform_reboot_tracking_boot(void) {
