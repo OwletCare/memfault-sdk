@@ -25,7 +25,7 @@
 
 //! Disable this warning; it trips when there's no custom macros defined of a
 //! given type
-MEMFAULT_DISABLE_WARNING("-Wunused-macros")
+// MEMFAULT_DISABLE_WARNING("-Wunused-macros")
 
 #undef MEMFAULT_METRICS_KEY_DEFINE
 #undef MEMFAULT_METRICS_KEY_DEFINE_WITH_RANGE
