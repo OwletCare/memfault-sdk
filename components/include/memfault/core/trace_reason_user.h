@@ -61,9 +61,11 @@ extern "C" {
 //! NB: ARMCC and IAR define __has_include but they don't work as expected
 # if !MEMFAULT_DISABLE_USER_TRACE_REASONS
 #  if !defined(__CC_ARM) && !defined(__ICCARM__)
-#   if defined(__has_include) && !__has_include(MEMFAULT_TRACE_REASON_USER_DEFS_FILE)
-#     pragma message("ERROR: " MEMFAULT_EXPAND_AND_QUOTE(MEMFAULT_TRACE_REASON_USER_DEFS_FILE) " must be in header search path")
-#     error "See trace_reason_user.h for more details"
+#   if defined(__has_include)
+#       if !__has_include(MEMFAULT_TRACE_REASON_USER_DEFS_FILE)
+#           pragma message("ERROR: " MEMFAULT_EXPAND_AND_QUOTE(MEMFAULT_TRACE_REASON_USER_DEFS_FILE) " must be in header search path")
+#           error "See trace_reason_user.h for more details"
+#       endif
 #   endif
 #  endif
 # endif
